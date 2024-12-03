@@ -10,7 +10,8 @@ That's it! The script will:
 - Install Git if needed
 - Install Node.js if needed
 - Download the project
-- Start the development server
+- Install dependencies
+- Start the development server from the frontend directory
 - Open the project in your default browser
 
 ## Mac/Linux Users

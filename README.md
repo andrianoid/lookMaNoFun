@@ -69,6 +69,8 @@ npm install
 
 3. Start the development server:
 ```bash
+# Make sure you're in the frontend directory
+cd frontend  # if not already in frontend directory
 npm run dev
 ```
 
@@ -97,6 +99,7 @@ frontend/
 
 ## Development
 
+From the `frontend` directory:
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
