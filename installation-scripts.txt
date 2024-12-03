@@ -1,0 +1,78 @@
+// install.bat - For Windows Users
+@echo off
+echo Installing lookMaNoFun...
+
+:: Check if Git is installed
+where git >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    echo Installing Git...
+    winget install --id Git.Git -e --source winget
+    :: Update PATH
+    set "PATH=%PATH%;C:\Program Files\Git\cmd"
+)
+
+:: Check if Node.js is installed
+where node >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    echo Installing Node.js...
+    winget install OpenJS.NodeJS.LTS
+    :: Update PATH
+    set "PATH=%PATH%;C:\Program Files\nodejs"
+)
+
+:: Clone and setup project
+echo Setting up project...
+git clone https://github.com/andrianoid/lookMaNoFun.git
+cd lookMaNoFun
+call npm install
+
+:: Start the development server
+echo Starting development server...
+start http://localhost:3000
+npm run dev
+
+# install.sh - For Mac/Linux Users
+#!/bin/bash
+echo "Installing lookMaNoFun..."
+
+# Check if Git is installed
+if ! command -v git &> /dev/null; then
+    echo "Installing Git..."
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        brew install git
+    else
+        # Linux
+        sudo apt-get update
+        sudo apt-get install -y git
+    fi
+fi
+
+# Check if Node.js is installed
+if ! command -v node &> /dev/null; then
+    echo "Installing Node.js..."
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        brew install node
+    else
+        # Linux
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    fi
+fi
+
+# Clone and setup project
+echo "Setting up project..."
+git clone https://github.com/andrianoid/lookMaNoFun.git
+cd lookMaNoFun
+npm install
+
+# Start the development server
+echo "Starting development server..."
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    open http://localhost:3000
+else
+    xdg-open http://localhost:3000
+fi
+npm run dev
