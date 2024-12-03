@@ -1,0 +1,44 @@
+name: Run Project Locally
+
+on: 
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Operating System'
+        required: true
+        default: 'windows'
+        type: choice
+        options:
+          - windows
+          - macos
+          - linux
+
+jobs:
+  generate-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Create Installation Script
+        run: |
+          mkdir -p scripts
+          if [[ "${{ github.event.inputs.platform }}" == "windows" ]]; then
+            cp .github/scripts/install.bat scripts/
+          else
+            cp .github/scripts/install.sh scripts/
+          fi
+      
+      - name: Create Installation Package
+        run: |
+          zip -r installation.zip scripts/
+
+      - name: Upload Installation Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: installation-package
+          path: installation.zip
+          
+      - name: Create Response
+        run: |
+          echo "Your installation package is ready! Click on the 'Artifacts' section above to download it."
+          echo "After downloading, just extract and run the script inside."
