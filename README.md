@@ -6,13 +6,13 @@ A web-based social gaming platform focused on multiplayer kart racing, built wit
 
 ### Windows Users
 
-1. Download the [`installation-scripts/install.bat`](installation-scripts/install.bat) file
+1. Download the [`installation-scripts/install.bat`](install.bat) file
 2. Right-click the file and select "Run as administrator"
 3. Wait for the installation to complete (a browser window will open automatically)
 
 ### Mac/Linux Users
 
-1. Download the [`installation-scripts/install.sh`](installation-scripts/install.sh) file
+1. Download the [`installation-scripts/install.sh`](install.sh) file
 2. Open Terminal
 3. Navigate to the folder containing the downloaded file:
    ```bash

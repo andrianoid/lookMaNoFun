@@ -17,6 +17,27 @@ if %errorLevel% neq 0 (
 echo Administrator privileges confirmed.
 echo.
 
+:: Check and delete existing installation directory
+echo Checking for existing installation...
+if exist "%INSTALL_DIR%" (
+    echo WARNING: Installation directory already exists at: %INSTALL_DIR%
+    set /p CONFIRM="Do you want to delete the existing installation? (Y/N): "
+    if /i "!CONFIRM!"=="Y" (
+        echo Deleting existing installation...
+        rd /s /q "%INSTALL_DIR%" || (
+            echo ERROR: Failed to delete existing installation.
+            echo Please close any open files or applications in the directory.
+            pause
+            exit /b 1
+        )
+        echo Existing installation deleted.
+    ) else (
+        echo Installation cancelled by user.
+        pause
+        exit /b 0
+    )
+)
+
 :: Create installation directory
 echo Creating installation directory...
 set "INSTALL_DIR=%USERPROFILE%\kart-racing-platform"
